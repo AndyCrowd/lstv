@@ -1,5 +1,5 @@
 #!/bin/bash
-if [ 'XX'"$1" != 'XX' ];then
+if [ "$1" ];then
 CC='^[0-9]+$';
   if ! [[ "$@" =~ $CC ]];then echo Is not a channel number!;
    else
