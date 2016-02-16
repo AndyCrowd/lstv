@@ -1,12 +1,26 @@
 #!/bin/bash
+## Version 1.0.1-1
+##
+## License: GPL2
+##
+## NOTE: It is just a simple example of how to list content with AWK 
+## and send command to the shell within AWK.
+## 
+## it reads file ~/.mplayer/channels.conf
+## and then starts mplayer with function system() in AWK
+##
+
+
 if [ "$1" ];then
 CC='^[0-9]+$';
   if ! [[ "$@" =~ $CC ]];then echo Is not a channel number!;
    else
 ##
+  xset -dpms s off;
     awk -F':' -v AA="$1" '//{ZZ++;
-     if(AA == ZZ)system("xset -dpms s off;mplayer dvb://""\""$1"\";xset +dpms s on")}
+     if(AA == ZZ)system("mplayer dvb://""\""$1"\"")}
      END{if(AA > ZZ)printf "The highest channel number is: "ZZ"\n"}' "$HOME/.mplayer/channels.conf"
+  xset +dpms s on;
 ##
   fi;
 else
